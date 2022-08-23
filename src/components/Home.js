@@ -1,7 +1,10 @@
+import Navbar from "./Navbar"
+
 const Home = () => {
     return (
         <div>
 
+            <Navbar />
 
             <h2 className="App-header">Rules:</h2>
             <h3>This is a website</h3>

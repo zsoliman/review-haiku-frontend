@@ -7,3 +7,7 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+
+// Clickable Home page button
+// Link to each route: Users, Home, Movies

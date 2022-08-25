@@ -1,16 +1,23 @@
+import { useEffect } from "react";
 import Navbar from "./Navbar";
 
 const Reviews = () => {
+
+    useEffect(() => {
+        const getReviews = async () => {
+            let req = await fetch('http://localhost:3100/reviews')
+            let res = await req.json()
+            console.log(res)
+        }
+        getReviews()
+
+    }, [])
+
     return (
         <div>
             <Navbar />
             <h2>List of Reviews in chronological order</h2>
-            <p>Review</p>
-            <p>Review</p>
-            <p>Review</p>
-            <p>Review</p>
-            <p>Review</p>
-            <p>Review</p>
+
         </div>
     )
 }

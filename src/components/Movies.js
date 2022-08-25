@@ -13,13 +13,13 @@ const Movies = () => {
     const [movies, setMovies] = useState([])
 
 
-    const getLocalMovies = async () => {
-        let req = await fetch(`http://localhost:3100/${'example.com'/*movie - title - will - go - here*/}`)
+    const getLocalMovies = async (query) => {
+        let req = await fetch(`http://localhost:3100/movies/title/${encodeURI(query)}`)
         let res = req.json()
         return res
     }
 
-    // useEffect(() => {
+
     const getMovie = async (query, pageNum = 1) => {
         console.log(searchTerm)
         let req = await fetch(`${baseUrl}search/movie?api_key=${API_KEY}&page=${pageNum}&query=${encodeURI(query)}`);
@@ -31,18 +31,19 @@ const Movies = () => {
             setMovies([])
         }
     }
-    // getMovie()
 
     const handleChange = (e) => {
         setSearchTerm(() => {
             const query = e.target.value
-            getMovie(query)
+            if (getLocalMovies(query) === []) {
+                getMovie(query)
+            } else {
+                getLocalMovies(query)
+            }
+
             return query
         })
     }
-    // }, [])
-
-
 
 
     const displaySearchMovies = movies.filter((movie) => {

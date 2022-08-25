@@ -1,35 +1,41 @@
 import { useState, useEffect } from "react";
+import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 
 const Reviews = () => {
 
-    const [reviews, setReviews] = useState([])
+  const [movies, setMovies] = useState([])
 
-    useEffect(() => {
+ useEffect(()=> {
+    const getMovies = async () => {
+      let req = await fetch('http://localhost:3100/movies/reviews/all')
+      let res = await req.json()
+      setMovies(res)
+    }
+    getMovies()
+ }, [])
+ console.log(movies)
+  return (
+    <div>
+      <Navbar />
+      <h2>List of Reviews</h2>
 
-        const getReviews = async () => {
-            let req = await fetch('http://localhost:3100/reviews')
-            let res = await req.json()
-            // console.log(res)
-            setReviews(res)
+      <div>
+        {
+          movies.map(movie => {
+            return (
+              <div key={movie.id} >
+                <h3>{movie.title}</h3>
+                <p>{movie.reviews.map(review => { return <div key={review.id} > <p>{review.line_1}</p> <p>{review.line_2}</p> <p>{review.line_3}</p> ... </div> })}</p>
+
+              </div>
+            )
+          })
         }
-        getReviews()
-    }, [])
+      </div>
 
-
-
-    return (
-        <div>
-            <Navbar />
-            <h2>List of Reviews</h2>
-
-            <div>{reviews.map((review) => {
-                console.log(review.line_1)
-                return (review.line_1)
-            })}</div>
-
-        </div>
-    )
+    </div>
+  )
 }
 
 export default Reviews

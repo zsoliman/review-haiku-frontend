@@ -15,8 +15,16 @@ const Movies = () => {
 
     const getLocalMovies = async (query) => {
         let req = await fetch(`http://localhost:3100/movies/title/${encodeURI(query)}`)
-        let res = req.json()
-        return res
+        let res = await req.json()
+        console.log(res)
+      // if (res.results) {
+      //   setMovies(res.results)
+      // } else {
+      //   setMovies([])
+      // }
+      setMovies(res)
+      console.log(res[0])
+      return res[0]
     }
 
 
@@ -35,11 +43,11 @@ const Movies = () => {
     const handleChange = (e) => {
         setSearchTerm(() => {
             const query = e.target.value
-            if (getLocalMovies(query) === []) {
-                getMovie(query)
-            } else {
-                getLocalMovies(query)
-            }
+            let arr = getLocalMovies(query) 
+            if (arr == null) {
+            getMovie(query)
+          } else {
+          }
 
             return query
         })
@@ -47,7 +55,7 @@ const Movies = () => {
 
 
     const displaySearchMovies = movies.filter((movie) => {
-        return movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+        return movie?.title.toLowerCase().includes(searchTerm.toLowerCase())
     })
 
     return (

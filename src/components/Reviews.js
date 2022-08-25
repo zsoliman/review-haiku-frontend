@@ -22,6 +22,7 @@ const Reviews = () => {
     const [lineTwo, setLineTwo] = useState('')
     const [lineThree, setLineThree] = useState('')
     const [userName, setUserName] = useState('')
+    const [stars, setStars] = useState('')
     const handleSubmit = async () => {
         let req = await fetch('http://localhost:3100/post', {
             method: 'POST',
@@ -31,7 +32,8 @@ const Reviews = () => {
                 line_1: lineOne,
                 line_2: lineTwo,
                 line_3: lineThree,
-                user_name: userName
+                user_name: userName,
+                star_num: stars
             })
 
         })
@@ -51,6 +53,7 @@ const Reviews = () => {
                 <input onChange={(e) => { setLineTwo(e.target.value) }} name="line_two" type='text' placeholder='seven syllables...' /><br />
                 <input onChange={(e) => { setLineThree(e.target.value) }} name="line_three" type='text' placeholder='five syllables...' /><br />
                 <input onChange={(e) => { setUserName(e.target.value) }} name="userName" type='text' placeholder='UserName...' /><br />
+                <input onChange={(e) => { setStars(e.target.value) }} name="stars" type='number' min='0' max='10' placeholder="stars..." /><br />
                 <input type='submit' />
             </form>
             <h2>List of Reviews</h2>
@@ -61,7 +64,7 @@ const Reviews = () => {
                         return (
                             <div key={movie.id} >
                                 <h3>{movie.title}</h3>
-                                <p>{movie.reviews.map(review => { return <div key={review.id} > <p>{review.line_1}</p> <p>{review.line_2}</p> <p>{review.line_3}</p> ... </div> })}</p>
+                                <p>{movie.reviews.map(review => { return <div key={review.id} > <p>{review.line_1}</p> <p>{review.line_2}</p> <p>{review.line_3}</p> <p>{review.star_num}/10 stars</p>... </div> })}</p>
 
                             </div>
                         )

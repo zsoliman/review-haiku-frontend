@@ -1,10 +1,12 @@
-// const MovieCard = () => {
+const MovieCard = ({ key, movie }) => {
 
-//     const baseImageUrl = "https://image.tmdb.org/t/p/w500";
+    const baseImageUrl = "https://image.tmdb.org/t/p/w500";
 
-//     return (
-//         // <img src={`${baseImageUrl}${movie.poster_path}`} />
-//     )
-// }
+    return (
+        <div className="movieCard">
+            <img alt={movie.title} src={`${baseImageUrl}${movie.poster_path}`} />
+        </div>
+    )
+}
 
-// export default MovieCard;
+export default MovieCard;

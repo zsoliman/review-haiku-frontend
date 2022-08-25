@@ -17,3 +17,13 @@
   background-color: antiquewhite;
   color: #282c34;
 }
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+}
+
+/* .movieCard {} */

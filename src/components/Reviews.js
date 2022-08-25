@@ -1,22 +1,32 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 
 const Reviews = () => {
 
+    const [reviews, setReviews] = useState([])
+
     useEffect(() => {
+
         const getReviews = async () => {
             let req = await fetch('http://localhost:3100/reviews')
             let res = await req.json()
-            console.log(res)
+            // console.log(res)
+            setReviews(res)
         }
         getReviews()
-
     }, [])
+
+
 
     return (
         <div>
             <Navbar />
-            <h2>List of Reviews in chronological order</h2>
+            <h2>List of Reviews</h2>
+
+            <div>{reviews.map((review) => {
+                console.log(review.line_1)
+                return (review.line_1)
+            })}</div>
 
         </div>
     )

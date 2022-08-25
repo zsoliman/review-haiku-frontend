@@ -4,38 +4,73 @@ import Navbar from "./Navbar";
 
 const Reviews = () => {
 
-  const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([])
 
- useEffect(()=> {
-    const getMovies = async () => {
-      let req = await fetch('http://localhost:3100/movies/reviews/all')
-      let res = await req.json()
-      setMovies(res)
-    }
-    getMovies()
- }, [])
- console.log(movies)
-  return (
-    <div>
-      <Navbar />
-      <h2>List of Reviews</h2>
-
-      <div>
-        {
-          movies.map(movie => {
-            return (
-              <div key={movie.id} >
-                <h3>{movie.title}</h3>
-                <p>{movie.reviews.map(review => { return <div key={review.id} > <p>{review.line_1}</p> <p>{review.line_2}</p> <p>{review.line_3}</p> ... </div> })}</p>
-
-              </div>
-            )
-          })
+    useEffect(() => {
+        const getMovies = async () => {
+            let req = await fetch('http://localhost:3100/movies/reviews/all')
+            let res = await req.json()
+            setMovies(res)
         }
-      </div>
+        getMovies()
+    }, [])
+    console.log(movies)
 
-    </div>
-  )
+
+    const [movieName, setMovieName] = useState('')
+    const [lineOne, setLineOne] = useState('')
+    const [lineTwo, setLineTwo] = useState('')
+    const [lineThree, setLineThree] = useState('')
+    const [userName, setUserName] = useState('')
+    const handleSubmit = async () => {
+        let req = await fetch('http://localhost:3100/post', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                movie_name: movieName,
+                line_1: lineOne,
+                line_2: lineTwo,
+                line_3: lineThree,
+                user_name: userName
+            })
+
+        })
+        let res = await req.json()
+        console.log(res)
+    }
+
+    return (
+        <div>
+            <Navbar />
+            <br /><br />
+
+            <form onSubmit={handleSubmit}>
+                <p>Submit Your Own Haiku Review</p>
+                <input onChange={(e) => { setMovieName(e.target.value) }} name="movieName" type='text' placeholder='Movie Name...' /><br />
+                <input onChange={(e) => { setLineOne(e.target.value) }} name="line_one" type='text' placeholder='five syllables...' /><br />
+                <input onChange={(e) => { setLineTwo(e.target.value) }} name="line_two" type='text' placeholder='seven syllables...' /><br />
+                <input onChange={(e) => { setLineThree(e.target.value) }} name="line_three" type='text' placeholder='five syllables...' /><br />
+                <input onChange={(e) => { setUserName(e.target.value) }} name="userName" type='text' placeholder='UserName...' /><br />
+                <input type='submit' />
+            </form>
+            <h2>List of Reviews</h2>
+
+            <div>
+                {
+                    movies.map(movie => {
+                        return (
+                            <div key={movie.id} >
+                                <h3>{movie.title}</h3>
+                                <p>{movie.reviews.map(review => { return <div key={review.id} > <p>{review.line_1}</p> <p>{review.line_2}</p> <p>{review.line_3}</p> ... </div> })}</p>
+
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
+        </div>
+    )
 }
 
 export default Reviews

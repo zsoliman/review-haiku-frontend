@@ -14,7 +14,7 @@
 }
 
 #Home:hover {
-  background-color: antiquewhite;
+  background-color: rgb(244, 244, 244);
   color: #282c34;
 }
 
@@ -34,8 +34,85 @@
 
 .movieCard {
   padding: 10px;
-  border: solid black;
+  /* border: solid black; */
   border-radius: 10px;
   margin: 8px;
   width: 130px;
+  background-color: rgb(244, 244, 244);
+  color: black;
+}
+
+.formLabel {
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+.reviewContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.reviewedMovie {
+
+
+  border-radius: 15px;
+  width: 40%;
+  align-self: center;
+  position: relative;
+  margin: 5px;
+  background-color: rgb(244, 244, 244);
+}
+
+.movieTitle {
+  border-bottom: solid black;
+  width: 80%;
+  margin: auto;
+  font-style: italic;
+}
+
+.starRating {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.poemLine {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.5em;
+}
+
+.formContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.haikuSubmitForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-color: goldenrod;
+  width: 40%;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: rgb(244, 244, 244);
+}
+
+.usersContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: rgb(244, 244, 244);
+  margin-bottom: 10px;
 }

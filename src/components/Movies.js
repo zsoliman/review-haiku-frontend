@@ -100,23 +100,23 @@ const Movies = () => {
     return (
         <div >
             <Navbar />
-            <h1>Find Haiku Reviews by Movie Title:</h1>
+            <h1>Find Movies by Title:</h1>
             <form onSubmit={(e) => e.preventDefault()}>
-                <button>Search</button>
-                <input onChange={handleChange} placeholder="Search a movie..." />
+                <input onChange={handleChange} placeholder="Enter title..." />
 
             </form>
-            <MovieList movies={displaySearchMovies} setRefresh={setRefresh} />
 
+            <br />
             <form onSubmit={handleMovieSubmit}>
-                <label>Can't Find Your Fav Movie? Add it here:</label><br />
-                <input onChange={(e) => { setTitle(e.target.value) }} placeholder="Add Title Here..." />
-                <input onChange={(e) => { setDirector(e.target.value) }} placeholder="Add Director Here..." />
-                <input onChange={(e) => { setGenre(e.target.value) }} placeholder="Add Genre Here..." />
-                <input onChange={(e) => { setYear(e.target.value) }} placeholder="Add Year Here..." />
+                <label className="formLabel">Can't Find Your Fav Movie? Add it here:</label><br />
+                <input onChange={(e) => { setTitle(e.target.value) }} placeholder="Add Title..." />
+                <input onChange={(e) => { setDirector(e.target.value) }} placeholder="Add Director..." />
+                <input onChange={(e) => { setGenre(e.target.value) }} placeholder="Add Genre..." />
+                <input onChange={(e) => { setYear(e.target.value) }} placeholder="Add Year..." />
 
                 <input type="submit" />
             </form>
+            <MovieList movies={displaySearchMovies} setRefresh={setRefresh} />
         </div>
     )
 }

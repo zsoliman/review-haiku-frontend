@@ -20,10 +20,10 @@ const Users = () => {
         <div>
             <Navbar />
             <h1>List of Users</h1>
-            <div>
+            <div className="usersContainer">
                 {users.map((user) => {
                     return (
-                        <div>
+                        <div className="userCard">
                             <h2>{user.user_name}</h2>
                             <p>{user.bio}</p>
                         </div>

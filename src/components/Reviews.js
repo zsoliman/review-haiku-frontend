@@ -22,6 +22,7 @@ const Reviews = () => {
     const [lineThree, setLineThree] = useState('')
     const [userName, setUserName] = useState('')
     const [stars, setStars] = useState('')
+
     const handleSubmit = async () => {
         let req = await fetch('http://localhost:3100/post', {
             method: 'POST',
@@ -41,29 +42,30 @@ const Reviews = () => {
     }
 
     return (
-        <div>
+        <div  >
             <Navbar />
             <br /><br />
+            <div className="formContainer" >
+                <form className="haikuSubmitForm" onSubmit={handleSubmit}>
+                    <p className="formLabel" >Submit Your Haiku Review</p>
+                    <input onChange={(e) => { setMovieName(e.target.value) }} name="movieName" type='text' placeholder='Movie Title' /><br />
+                    <input onChange={(e) => { setLineOne(e.target.value) }} name="line_one" type='text' placeholder='Line 1 (five syllables)' /><br />
+                    <input onChange={(e) => { setLineTwo(e.target.value) }} name="line_two" type='text' placeholder='Line 2 (seven syllables)' /><br />
+                    <input onChange={(e) => { setLineThree(e.target.value) }} name="line_three" type='text' placeholder='Line 3 (five syllables)' /><br />
+                    <input onChange={(e) => { setUserName(e.target.value) }} name="userName" type='text' placeholder='Your username' /><br />
+                    <input onChange={(e) => { setStars(e.target.value) }} name="stars" type='number' min='0' max='10' placeholder="stars" /><br />
+                    <input type='submit' />
+                </form>
+            </div>
+            <h2>Reviews</h2>
 
-            <form onSubmit={handleSubmit}>
-                <p>Submit Your Own Haiku Review</p>
-                <input onChange={(e) => { setMovieName(e.target.value) }} name="movieName" type='text' placeholder='Movie Name...' /><br />
-                <input onChange={(e) => { setLineOne(e.target.value) }} name="line_one" type='text' placeholder='five syllables...' /><br />
-                <input onChange={(e) => { setLineTwo(e.target.value) }} name="line_two" type='text' placeholder='seven syllables...' /><br />
-                <input onChange={(e) => { setLineThree(e.target.value) }} name="line_three" type='text' placeholder='five syllables...' /><br />
-                <input onChange={(e) => { setUserName(e.target.value) }} name="userName" type='text' placeholder='UserName...' /><br />
-                <input onChange={(e) => { setStars(e.target.value) }} name="stars" type='number' min='0' max='10' placeholder="stars..." /><br />
-                <input type='submit' />
-            </form>
-            <h2>List of Reviews</h2>
-
-            <div>
+            <div className="reviewContainer" >
                 {
                     movies.map(movie => {
                         return (
-                            <div key={movie.id} >
-                                <h3>{movie.title}</h3>
-                                <p>{movie.reviews.map(review => { return <div key={review.id} > <p>{review.line_1}</p> <p>{review.line_2}</p> <p>{review.line_3}</p> <p>{review.star_num}/10 stars</p>... </div> })}</p>
+                            <div className="reviewedMovie" key={movie.id} >
+                                <h3 className="movieTitle" >{movie.title}</h3>
+                                <p>{movie.reviews.map(review => { return <div key={review.id} > <p className="poemLine" >{review.line_1}</p> <p className="poemLine" >{review.line_2}</p> <p className="poemLine" >{review.line_3}</p> <p className="starRating" >{review.star_num}/10 stars</p>... </div> })}</p>
 
                             </div>
                         )

@@ -4,9 +4,9 @@ const MovieCard = ({ movie }) => {
 
     console.log(movie)
     return (
-        <div className="movieCard">
-            <img alt={movie?.title} src={`${baseImageUrl}${movie.poster_path}`} />
-            <h1>{movie?.title}</h1>
+        <div>
+            {/* <img alt={movie?.title} src={`${baseImageUrl}${movie.poster_path}`} /> */}
+            <h1>{movie?.title}</h1><br />
         </div>
     )
 }

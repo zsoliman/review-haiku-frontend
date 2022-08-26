@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 
 const Reviews = () => {

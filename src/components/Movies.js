@@ -12,20 +12,34 @@ const Movies = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [movies, setMovies] = useState([])
 
+    useEffect(() => {
+        const getInitialMovies = async () => {
+            const req = await fetch('http://localhost:3100/movies')
+            const res = await req.json()
+            console.log('res', res)
+            setMovies(res)
+        }
+        if (searchTerm === "") {
+            getInitialMovies()
+        }
+    }, [searchTerm])
 
     const getLocalMovies = async (query) => {
         let req = await fetch(`http://localhost:3100/movies/title/${encodeURI(query)}`)
         let res = await req.json()
         console.log(res)
-      // if (res.results) {
-      //   setMovies(res.results)
-      // } else {
-      //   setMovies([])
-      // }
-      setMovies(res)
-      console.log(res[0])
-      return res[0]
+        // if (res.results) {
+        //   setMovies(res.results)
+        // } else {
+        //   setMovies([])
+        // }
+        setMovies(res)
+        console.log(res[0])
+        return res
     }
+    //     getLocalMovies()
+    // }, [])
+
 
 
     const getMovie = async (query, pageNum = 1) => {
@@ -43,11 +57,11 @@ const Movies = () => {
     const handleChange = (e) => {
         setSearchTerm(() => {
             const query = e.target.value
-            let arr = getLocalMovies(query) 
-            if (arr == null) {
-            getMovie(query)
-          } else {
-          }
+            let arr = getLocalMovies(query)
+            //     if (arr == null) {
+            //     getMovie(query)
+            //   } else {
+            //   }
 
             return query
         })
@@ -55,7 +69,7 @@ const Movies = () => {
 
 
     const displaySearchMovies = movies.filter((movie) => {
-        return movie?.title.toLowerCase().includes(searchTerm.toLowerCase())
+        return movie?.title?.toLowerCase().includes(searchTerm.toLowerCase())
     })
 
     return (
@@ -68,6 +82,12 @@ const Movies = () => {
 
             </form>
             <MovieList movies={displaySearchMovies} />
+
+            <form>
+                <label>Can't Find Your Fav Movie? Add it here:</label><br />
+                <input placeholder="Add Title Here..." />
+
+            </form>
         </div>
     )
 }

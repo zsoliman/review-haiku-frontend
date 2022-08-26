@@ -1,6 +1,6 @@
 import MovieCard from "./MovieCard";
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, setRefresh }) => {
     return (
         <ul className="movieList">
             {
@@ -9,6 +9,7 @@ const MovieList = ({ movies }) => {
                         <MovieCard
                             key={movie.id}
                             movie={movie}
+                            setRefresh={setRefresh}
                         />
                     )
                 })

@@ -11,6 +11,7 @@ const API_KEY = 'efa6aa6cb7278762054859c476be335b'
 const Movies = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [movies, setMovies] = useState([])
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         const getInitialMovies = async () => {
@@ -22,7 +23,7 @@ const Movies = () => {
         if (searchTerm === "") {
             getInitialMovies()
         }
-    }, [searchTerm])
+    }, [searchTerm, refresh])
 
     const getLocalMovies = async (query) => {
         let req = await fetch(`http://localhost:3100/movies/title/${encodeURI(query)}`)
@@ -78,6 +79,7 @@ const Movies = () => {
     const [genre, setGenre] = useState('')
     const [year, setYear] = useState('')
     const handleMovieSubmit = async () => {
+        // e.preventDefault()
         let req = await fetch('http://localhost:3100/postmovie', {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
@@ -92,6 +94,7 @@ const Movies = () => {
         })
         let res = await req.json()
         console.log(res)
+        // setRefresh(prev => !prev)
     }
 
     return (
@@ -103,7 +106,7 @@ const Movies = () => {
                 <input onChange={handleChange} placeholder="Search a movie..." />
 
             </form>
-            <MovieList movies={displaySearchMovies} />
+            <MovieList movies={displaySearchMovies} setRefresh={setRefresh} />
 
             <form onSubmit={handleMovieSubmit}>
                 <label>Can't Find Your Fav Movie? Add it here:</label><br />

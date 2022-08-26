@@ -26,4 +26,10 @@
 
 }
 
+.deleteButton {
+  border-radius: 10px;
+  border-color: red;
+  font-size: 8px;
+}
+
 /* .movieCard {} */

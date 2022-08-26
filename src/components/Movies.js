@@ -72,6 +72,28 @@ const Movies = () => {
         return movie?.title?.toLowerCase().includes(searchTerm.toLowerCase())
     })
 
+
+    const [title, setTitle] = useState('')
+    const [director, setDirector] = useState('')
+    const [genre, setGenre] = useState('')
+    const [year, setYear] = useState('')
+    const handleMovieSubmit = async () => {
+        let req = await fetch('http://localhost:3100/postmovie', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                title: title,
+                director: director,
+                genre: genre,
+                year: year
+
+            })
+
+        })
+        let res = await req.json()
+        console.log(res)
+    }
+
     return (
         <div >
             <Navbar />
@@ -83,10 +105,14 @@ const Movies = () => {
             </form>
             <MovieList movies={displaySearchMovies} />
 
-            <form>
+            <form onSubmit={handleMovieSubmit}>
                 <label>Can't Find Your Fav Movie? Add it here:</label><br />
-                <input placeholder="Add Title Here..." />
+                <input onChange={(e) => { setTitle(e.target.value) }} placeholder="Add Title Here..." />
+                <input onChange={(e) => { setDirector(e.target.value) }} placeholder="Add Director Here..." />
+                <input onChange={(e) => { setGenre(e.target.value) }} placeholder="Add Genre Here..." />
+                <input onChange={(e) => { setYear(e.target.value) }} placeholder="Add Year Here..." />
 
+                <input type="submit" />
             </form>
         </div>
     )

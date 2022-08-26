@@ -22,7 +22,12 @@ const Users = () => {
             <h1>List of Users</h1>
             <div>
                 {users.map((user) => {
-                    return (user.user_name)
+                    return (
+                        <div>
+                            <h2>{user.user_name}</h2>
+                            <p>{user.bio}</p>
+                        </div>
+                    )
                 })}
             </div>
 
@@ -31,6 +36,8 @@ const Users = () => {
                 <input type='text' placeholder="User Name" />
                 <input type='text' placeholder="Bio" />
             </form>
+            <br />
+
         </div>
     )
 }

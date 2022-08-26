@@ -11,7 +11,7 @@ const MovieCard = ({ movie, setRefresh }) => {
 
     console.log(movie)
     return (
-        <div>
+        <div className="movieCard" >
             {/* <img alt={movie?.title} src={`${baseImageUrl}${movie.poster_path}`} /> */}
             <h2>{movie?.title}</h2>
             <p>{movie?.director} </p>
